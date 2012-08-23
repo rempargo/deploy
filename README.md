@@ -1,29 +1,18 @@
 # PaulRake
 
-TODO: Write a gem description
+Gem with Paul's rake tasks for nginx
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'paul_rake'
+    gem 'paul_rake', :git => 'git://github.com/[accountname]/paul_rake.git'
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install paul_rake
 
 ## Usage
 
-TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+Check rake -T for nginx commands
