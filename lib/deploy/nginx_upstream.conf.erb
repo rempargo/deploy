@@ -5,7 +5,7 @@ upstream domains_for_sale {
 		<% end %>
 	<% else %>
 		<% (0...thin['servers']).each do |n| %>
-			<%= "server unix:/tmp/thin.domain_for_sale.#{n}.sock;" %> 
+			<%= "server unix:/tmp/thin.domain_for_sale.#{n}.socket;" %> 
 		<% end %>
 	<% end %>
 }
