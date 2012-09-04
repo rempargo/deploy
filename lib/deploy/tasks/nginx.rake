@@ -5,8 +5,6 @@ namespace :deploy do
     task :conf,[:domain] do |cmd,args|
 
       domain = args[:domain].to_s
-      puts domain
-      puts domain.class
 
       if domain == ""
         default = 'example.com'

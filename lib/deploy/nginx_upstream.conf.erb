@@ -1,4 +1,4 @@
-upstream domains_for_sale {
+upstream <%= Rails.application.class.parent_name.underscore %> {
 	<% if thin.has_key?('port') %>
 		<% (0...thin['servers']).each do |n| %>
 		<%= "server localhost:6#{"%03d" % thin['port']+n};" %>
