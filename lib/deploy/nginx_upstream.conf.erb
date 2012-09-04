@@ -5,7 +5,7 @@ upstream <%= Rails.application.class.parent_name.underscore %> {
 		<% end %>
 	<% else %>
 		<% (0...thin['servers']).each do |n| %>
-			<%= "server unix:/tmp/thin.domain_for_sale.#{n}.socket;" %> 
+			<%= "server unix:/tmp/thin.#{Rails.application.class.parent_name.underscore}.#{n}.socket;" %> 
 		<% end %>
 	<% end %>
 }
