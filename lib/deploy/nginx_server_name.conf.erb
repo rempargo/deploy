@@ -3,7 +3,7 @@ server {
 		server_name www.<%= domain %>;
         listen   80 ;                                           # listen for ipv4
         listen   [::]:80 ;                                      # listen for ipv6
-        location / { proxy_pass      http://<%= Rails.application.class.parent_name.underscore %>; }
+        location / { proxy_pass      http://<%= domain %>; }
         access_log  /var/log/nginx/<%= Rails.application.class.parent_name.underscore %>.access.log;
 }
 
