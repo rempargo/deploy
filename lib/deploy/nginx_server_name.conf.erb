@@ -3,8 +3,8 @@ server {
 		server_name www.<%= domain %>;
         listen   80 ;                                           # listen for ipv4
         listen   [::]:80 ;                                      # listen for ipv6
-        location / { proxy_pass      http://domains_for_sale; }
-        access_log  /var/log/nginx/domains_for_sales.access.log;
+        location / { proxy_pass      http://<%= Rails.application.class.parent_name.underscore %>; }
+        access_log  /var/log/nginx/<%= Rails.application.class.parent_name.underscore %>.access.log;
 }
 
 # rewrites of all subdomains to www

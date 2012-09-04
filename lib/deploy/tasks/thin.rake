@@ -28,7 +28,14 @@ namespace :deploy do
     task :socket => :environment do
       unless thin
       command = "thin config -C #{thin_file} -e production --servers 3 --timeout 20 --wait 15 --onebyone --socket /tmp/thin.#{Rails.application.class.parent_name.underscore}.socket"
-        system(command)
+      unless system(command)
+      puts 'The thin gem is not installed in your current system/environment/gemset/Gemfile'
+      puts 'add the following to your Gemfile'
+      puts "gem 'thin'"
+      puts 'Or install manually with:'
+      puts 'gem install thin --no-ri --no-rdoc'
+      abort('Will stop rake task now!')
+      end
       else
         unless thin["socket"]
           hash = thin
