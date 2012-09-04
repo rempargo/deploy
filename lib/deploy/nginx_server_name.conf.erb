@@ -1,0 +1,17 @@
+# proxy to backend server
+server {
+		server_name www.<%= domain %>;
+        listen   80 ;                                           # listen for ipv4
+        listen   [::]:80 ;                                      # listen for ipv6
+        location / { proxy_pass      http://domains_for_sale; }
+        access_log  /var/log/nginx/domains_for_sales.access.log;
+}
+
+# rewrites of all subdomains to www
+server {
+server_name <%= domain %> *.<%= domain %>;
+        listen   80 ;                                           ## listen for ipv4
+        listen   [::]:80 ;                                      ## listen for ipv6
+        rewrite ^       http://www.<%= domain %>$request_uri?    permanent;
+}
+

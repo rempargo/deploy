@@ -1,12 +1,12 @@
-# PaulRake
+# Deploy
 
-Gem with Paul's rake tasks for nginx
+Gem with Deploy Rake tasks for Thin Clusters & Nginx.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'paul_rake', :git => 'git://github.com/[accountname]/paul_rake.git'
+    gem 'deploy', :git => 'git://github.com/[accountname]/deploy.git'
 
 And then execute:
 
