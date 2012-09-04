@@ -11,9 +11,9 @@ end
 def write(file_path,content)
   if CONFIG['host_os'] =~ /linux/
     File.open(file_path, 'w') {|f| f.write(content) }
-    p content
-    p "================================="
-    p "wrote #{file_path}"
+    puts content
+    puts "================================="
+    puts "wrote #{file_path}"
   else
     puts "================================="
     puts file_path

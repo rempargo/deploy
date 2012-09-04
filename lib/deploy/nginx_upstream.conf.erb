@@ -1,5 +1,4 @@
 upstream domains_for_sale {
-	server_names_hash_bucket_size  64;
 	<% if thin.has_key?('port') %>
 		<% (0...thin['servers']).each do |n| %>
 		<%= "server localhost:6#{"%03d" % thin['port']+n};" %>
