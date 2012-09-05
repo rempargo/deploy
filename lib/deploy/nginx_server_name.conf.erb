@@ -1,17 +1,25 @@
-# proxy to backend server
 server {
-		server_name www.<%= domain %>;
-        listen   80 ;                                           # listen for ipv4
-        listen   [::]:80 ;                                      # listen for ipv6
-        location / { proxy_pass      http://<%= domain %>; }
-        access_log  /var/log/nginx/<%= Rails.application.class.parent_name.underscore %>.access.log;
-}
+	listen   80 ;                                           # listen for ipv4
+	listen   [::]:80 ;                                      # listen for ipv6
 
-# rewrites of all subdomains to www
-server {
-server_name <%= domain %> *.<%= domain %>;
-        listen   80 ;                                           ## listen for ipv4
-        listen   [::]:80 ;                                      ## listen for ipv6
-        rewrite ^       http://www.<%= domain %>$request_uri?    permanent;
-}
+	server_name <%= domain %>;
 
+	# access_log /var/www/<%= Rails.application.class.parent_name.underscore %>/log/access.log;
+	error_log  /var/www/<%= Rails.application.class.parent_name.underscore %>/log/error.log;
+	root       /var/www/<%= Rails.application.class.parent_name.underscore %>.example.com;
+	#index      index.html;
+
+	location / {
+		root /opt/railsapps/<%= Rails.application.class.parent_name.underscore %>/public;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header Host $http_host;
+		proxy_redirect off;
+
+		# If you don't find the filename in the static files
+		# Then request it from the unicorn server
+		if (!-f $request_filename) {
+			proxy_pass http://<%= Rails.application.class.parent_name.underscore %>;
+			break;
+		}
+	}
+}
