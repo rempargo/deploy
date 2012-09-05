@@ -4,10 +4,8 @@ server {
 
 	server_name <%= domain %>;
 
-	# access_log /var/www/<%= Rails.application.class.parent_name.underscore %>/log/access.log;
-	error_log  /var/www/<%= Rails.application.class.parent_name.underscore %>/log/error.log;
-	root       /var/www/<%= Rails.application.class.parent_name.underscore %>.example.com;
-	#index      index.html;
+	# access_log /var/log/<%= Rails.application.class.parent_name.underscore %>_access.log;
+	error_log  /var/log/<%= Rails.application.class.parent_name.underscore %>_error.log;
 
 	location / {
 		root /opt/railsapps/<%= Rails.application.class.parent_name.underscore %>/public;

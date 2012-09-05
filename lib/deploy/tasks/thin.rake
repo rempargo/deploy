@@ -24,7 +24,7 @@ namespace :deploy do
     end
 
 
-    # "create default thin with sockets configuration file in 'config/deployment.yml'"
+     "create default thin with sockets configuration file in 'config/deployment.yml'"
     task :socket => :environment do
       unless thin
       command = "thin config -C #{thin_file} -e production --servers 3 --timeout 20 --wait 15 --onebyone --socket /tmp/thin.#{Rails.application.class.parent_name.underscore}.socket"
