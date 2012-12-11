@@ -22,12 +22,12 @@ namespace :deploy do
     task :upstream do
       if thin 
         file_path = "/etc/nginx/sites-enabled/#{Rails.application.class.parent_name.underscore}.upstream"
-
         content = ERB.new(File.read(MyGem::Railtie.root.join('nginx_upstream.conf.erb'))).result(binding)
         write(file_path,content)
       else
         puts 'Please deploy thin clusters first with: rake deploy:thin:port or rake deploy:thin:socket '
       end
+              puts "Don't forget to run: service nginx restart"
     end
 
     #desc 'Creates nginx conf files for single domain'

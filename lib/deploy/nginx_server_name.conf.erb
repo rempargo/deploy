@@ -14,7 +14,7 @@ server {
 		proxy_redirect off;
 
 		# If you don't find the filename in the static files
-		# Then request it from the unicorn server
+		# Then request it from the thin server
 		if (!-f $request_filename) {
 			proxy_pass http://<%= Rails.application.class.parent_name.underscore %>;
 			break;

@@ -1,13 +1,14 @@
-upstream <%= Rails.application.class.parent_name.underscore %> {
-	<% if thin.has_key?('port') %>
-	<% (0...thin['servers']).each do |n| %>
-	<%= "server localhost:6#{"%03d" % thin['port']+n};" %>
-	<% end %>
-	<% else %>
-	<% (0...thin['servers']).each do |n| %>
-	<%= "server unix:/tmp/thin.#{Rails.application.class.parent_name.underscore}.#{n}.socket;" %> 
-	<% end %>
-	<% end %>
+upstream <%= Rails.application.class.parent_name.underscore %> {<%
+	if thin.has_key?('port') 
+		(0...thin['servers']).each do |n| %>
+		<%= "server localhost:#{"%03d" % (thin['port']+n)};" %><%
+	end
+else 
+	(0...thin['servers']).each do |n| %>
+	<%= "server unix:/tmp/thin.#{Rails.application.class.parent_name.underscore}.#{n}.socket;" %><%
+end
+end
+%>
 }
 
 
