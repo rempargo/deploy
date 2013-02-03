@@ -15,6 +15,9 @@ namespace :deploy do
 
       file_path = "/etc/nginx/sites-enabled/#{domain}"
       write(file_path,content)
+      puts "Don't forget to add the following in the nameserver of your domain provider (e.g. transip.nl)."
+      puts "Name            TTL      Type  Value"
+      puts "#{""}                1 Min.   A     #{ip4.ip_address if ip4}"
     end
 
 
