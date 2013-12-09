@@ -1,23 +1,23 @@
 server {
-	listen   80 ;                                           # listen for ipv4
-	listen   [::]:80 ;                                      # listen for ipv6
+	listen   80 ;								# listen for ipv4
+	listen   [::]:80 ipv6only=on;				# listen for ipv6
 
 	server_name <%= domain %>;
 
-	# access_log /var/log/<%= Rails.application.class.parent_name.underscore %>_access.log;
-	error_log  /var/log/<%= Rails.application.class.parent_name.underscore %>_error.log;
+	# access_log /var/log/nginx/<%= Rails.application.class.parent_name.underscore %>_access.log;
+	error_log  /var/log/nginx/<%= Rails.application.class.parent_name.underscore %>_error.log;
 
+	root /opt/railsapps/<%= Rails.application.class.parent_name.underscore %>/public;
+
+	# serve static files directly from file system and when not found goes to @rails_thin_cluster
 	location / {
-		root /opt/railsapps/<%= Rails.application.class.parent_name.underscore %>/public;
+		try_files $uri $uri/ @rails_thin_cluster;
+	}
+
+	location @rails_thin_cluster {
 		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 		proxy_set_header Host $http_host;
 		proxy_redirect off;
-
-		# If you don't find the filename in the static files
-		# Then request it from the thin server
-		if (!-f $request_filename) {
-			proxy_pass http://<%= Rails.application.class.parent_name.underscore %>;
-			break;
-		}
+		proxy_pass http://<%= Rails.application.class.parent_name.underscore %>;
 	}
 }

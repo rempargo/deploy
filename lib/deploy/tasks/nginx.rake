@@ -21,6 +21,30 @@ namespace :deploy do
     end
 
 
+    namespace :nginx do
+
+      desc 'Creates nginx .conf file for a static webpage in /opt/static'
+      task :conf_static,[:domain] do |cmd,args|
+
+        domain = args[:domain].to_s
+
+        if domain == ""
+          default = 'example.com'
+          domain = ask("What hostname do you want to use for this app? (#{default}) ") 
+          domain = default if domain == ""
+        end
+        content = ERB.new(File.read(MyGem::Railtie.root.join('nginx_static_server_name.conf.erb'))).result(binding)
+
+        file_path = "/etc/nginx/sites-enabled/#{domain}"
+        write(file_path,content)
+        puts "Don't forget to add the following in the nameserver of your domain provider (e.g. transip.nl)."
+        puts "Name            TTL      Type  Value"
+        puts "#{""}                1 Min.   A     #{ip4.ip_address if ip4}"
+      end
+
+
+
+
     desc "create nginx upstream .conf file"
     task :upstream do
       if thin 
