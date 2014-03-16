@@ -18,6 +18,9 @@ namespace :deploy do
       puts "Don't forget to add the following in the nameserver of your domain provider (e.g. transip.nl)."
       puts "Name            TTL      Type  Value"
       puts "#{""}                1 Min.   A     #{ip4.ip_address if ip4}"
+      puts
+      puts 'And maybe you should also add some subdomains for your public folder'
+
     end
 
 

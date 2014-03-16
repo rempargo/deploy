@@ -1,0 +1,12 @@
+server {
+        listen   80;                                           # listen for ipv4
+        listen   [::]:80;                                      # listen for ipv6
+
+
+        server_name .<%= domain %>;
+
+		access_log /var/log/nginx/<%= domain.split(' ')[0].gsub('.','_').gsub('*','WILDCARD') %>_access.log;
+		error_log  /var/log/nginx/<%= domain.split(' ')[0].gsub('.','_').gsub('*','WILDCARD') %>_error.log;
+
+        rewrite ^ <%= protocol %>://<%= new_domain %> redirect;
+}
