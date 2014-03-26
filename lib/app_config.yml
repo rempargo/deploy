@@ -1,6 +1,6 @@
 ---
 :app_name: example
-:description: "Some description of the app."
+:app_description: "Some description of the app."
 :domain_name: flapie.nl
 :server_ip: 144.76.203.141
 :server_user: paul
@@ -12,3 +12,6 @@
 :ruby_version: ruby-2.1.0-preview1
 :github_user: rempargo
 :github_private: true
+:transip_user: nebits
+:transip_ip: 212.64.109.224
+:transip_key_file: transip_api
