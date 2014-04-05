@@ -1,14 +1,15 @@
 ---
 :app_name: example
 :app_description: "Some description of the app."
+:internal_servers: 2
+:internal_port: 3000
 :domain_name: flapie.nl
 :server_ip: 144.76.203.141
 :server_user: paul
 :server_apps_path: /opt/railsapps
 :subdomains:
-- pipo
-- de
-- clown
+- www
+- mobile
 :ruby_version: ruby-2.1.0-preview1
 :github_user: rempargo
 :github_private: true

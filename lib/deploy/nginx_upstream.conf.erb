@@ -1,4 +1,4 @@
-upstream <%= Rails.application.class.parent_name.underscore %> {<%
+upstream <%= app_name %> {<%
 	if thin.has_key?('port') 
 		(0...thin['servers']).each do |n| %>
 		<%= "server localhost:#{"%03d" % (thin['port']+n)};" %><%

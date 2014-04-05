@@ -11,6 +11,9 @@ namespace :deploy do
         domain = ask("What hostname do you want to use for this app? (#{default}) ") 
         domain = default if domain == ""
       end
+      server_apps_path  = '/opt/railsapps'
+      app_name          = Rails.application.class.parent_name.underscore
+      
       content = ERB.new(File.read(MyGem::Railtie.root.join('nginx_server_name.conf.erb'))).result(binding)
 
       file_path = "/etc/nginx/sites-enabled/#{domain}"
@@ -44,11 +47,13 @@ namespace :deploy do
     desc "create nginx upstream .conf file"
     task :upstream do
       if thin 
-        file_path = "/etc/nginx/sites-enabled/#{Rails.application.class.parent_name.underscore}.upstream"
+        app_name = Rails.application.class.parent_name.underscore
+        file_path = "/etc/nginx/sites-enabled/#{app_name}.upstream"
         content = ERB.new(File.read(MyGem::Railtie.root.join('nginx_upstream.conf.erb'))).result(binding)
         write(file_path,content)
       else
-        puts 'Please deploy thin clusters first with: rake deploy:thin:port or rake deploy:thin:socket '
+        puts 'Please deploy thin clusters first with: rake deploy:thin:port   ' if      thin['port']
+        puts 'Please deploy thin clusters first with: rake deploy:thin:socket ' unless  thin['port']
       end
       puts "Don't forget to run: service nginx restart"
     end
